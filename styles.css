@@ -107,7 +107,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 @media (max-width: 420px) {
   .brand small { display: none; }
   .brand strong { font-size: 0.95rem; }
-  .brand-mark { width: 36px; height: 36px; border-radius: 12px; }
+  .brand-mark { width: 36px; height: 36px; border-radius: 100%; }
   .site-header { gap: 12px; }
   .header-actions { gap: 10px; }
   .header-home { font-size: 0.84rem; }
