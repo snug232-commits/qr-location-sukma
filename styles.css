@@ -85,6 +85,12 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .service-list { display: grid; gap: 12px; }
 .service-link { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px; border: 1px solid var(--line); border-radius: 15px; color: var(--ink); text-decoration: none; background: var(--surface-soft); }
 .service-link:hover { border-color: #91c5bb; background: #edf8f5; }
+:root[data-theme="dark"] .service-link:hover,
+:root[data-theme="dark"] .service-link:focus-visible,
+:root[data-theme="dark"] .service-link:active { color: #122b35; background: #edf8f5; }
+:root[data-theme="dark"] .service-link:hover small,
+:root[data-theme="dark"] .service-link:focus-visible small,
+:root[data-theme="dark"] .service-link:active small { color: #5e7278; }
 .service-link strong, .service-link small { display: block; }
 .service-link small { margin-top: 4px; color: var(--muted); }
 .service-arrow { color: var(--sea); font-size: 1.25rem; }
