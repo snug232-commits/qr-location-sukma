@@ -34,6 +34,14 @@ const regions = [
   }
 ];
 
+const regionIcons = {
+  "auckland-region": "assets/region-auckland.svg",
+  "wellington-region": "assets/region-wellington.svg",
+  "canterbury-region": "assets/region-canterbury.svg",
+  "southern-lakes-region": "assets/region-southern-lakes.svg",
+  "otago-region": "assets/region-otago.svg"
+};
+
 const app = document.querySelector("#app");
 const findRegion = (id) => regions.find((region) => region.id === id);
 function findTown(id) {
@@ -48,11 +56,11 @@ function linkFor(hash, label) { return `<button class="crumb" data-hash="${hash}
 function breadcrumbs(items) { return `<nav class="breadcrumbs" aria-label="Breadcrumb">${items.map((item, index) => `${index ? '<span class="crumb-separator" aria-hidden="true">/</span>' : ""}${item.hash ? linkFor(item.hash, item.label) : `<span aria-current="page">${escapeHtml(item.label)}</span>`}`).join("")}</nav>`; }
 function regionCounts(region) { return region.towns.reduce((counts, town) => ({ towns: counts.towns + 1, mountains: counts.mountains + town.mountains.length, beaches: counts.beaches + town.beaches.length }), { towns: 0, mountains: 0, beaches: 0 }); }
 function card({ icon, iconClass = "", title, description, meta = "", hash, className = "" }) {
-  return `<button class="card ${className}" data-hash="${hash}"><span class="card-icon ${iconClass}" aria-hidden="true">${icon}</span><span class="card-arrow" aria-hidden="true">↗</span><h3>${escapeHtml(title)}</h3>${description ? `<p>${escapeHtml(description)}</p>` : ""}${meta ? `<span class="card-meta">${meta}</span>` : ""}</button>`;
+  return `<button class="card ${className}" data-hash="${hash}"><span class="card-icon ${iconClass}" aria-hidden="true">${icon}</span><h3>${escapeHtml(title)}</h3>${description ? `<p>${escapeHtml(description)}</p>` : ""}${meta ? `<span class="card-meta">${meta}</span>` : ""}</button>`;
 }
 
 function renderHome() {
-  app.innerHTML = `<section class="hero"><p class="eyebrow">New Zealand location guide</p><h1>Explore Aotearoa with the right information.</h1><p>Find a region, town or outdoor destination, then connect directly to trusted weather, earthquake, volcano and water-safety services.</p></section><div class="section-heading"><div><h2>Choose a region</h2><p>Start with a part of New Zealand.</p></div></div><section class="card-grid" aria-label="New Zealand regions">${regions.map((region) => { const counts = regionCounts(region); return card({ icon: "✦", title: region.name, description: region.description, meta: `<span class="pill">${counts.towns} ${counts.towns === 1 ? "town" : "towns"}</span><span class="pill">${counts.mountains} mountains</span><span class="pill">${counts.beaches} beaches</span>`, hash: `#/region/${region.id}` }); }).join("")}</section>`;
+  app.innerHTML = `<section class="hero"><p class="eyebrow">New Zealand location guide</p><h1> Explore Aotearoa with confidence</h1><p>Find your destinations and connect directly to trusted weather, earthquake, volcano and water-safety information</p></section><div class="section-heading"><div><h2>Choose a region</h2><p>Start with a part of New Zealand.</p></div></div><section class="card-grid" aria-label="New Zealand regions">${regions.map((region) => { const counts = regionCounts(region); return card({ icon: `<img src="${regionIcons[region.id]}" alt="">`, title: region.name, description: region.description, meta: `<span class="pill">${counts.towns} ${counts.towns === 1 ? "town" : "towns"}</span><span class="pill">${counts.mountains} mountains</span><span class="pill">${counts.beaches} beaches</span>`, hash: `#/region/${region.id}` }); }).join("")}</section>`;
 }
 function renderRegion(region) {
   app.innerHTML = `${breadcrumbs([{ label: "Home", hash: "#/" }, { label: region.name }])}<section class="page-heading"><h1 class="page-title">${escapeHtml(region.name)}</h1><p class="page-intro">${escapeHtml(region.description)} Choose a town or city to continue.</p></section><div class="section-heading"><div><h2>City and town locations</h2><p>${region.towns.length} available ${region.towns.length === 1 ? "location" : "locations"}</p></div></div><section class="card-grid" aria-label="Towns and cities">${region.towns.map((town) => card({ icon: "⌂", title: town.name, description: "Explore mountains and beaches in this area.", meta: `<span class="pill">${town.mountains.length} mountains</span><span class="pill">${town.beaches.length} beaches</span>`, hash: `#/town/${town.id}` })).join("")}</section>`;
