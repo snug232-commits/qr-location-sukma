@@ -12,9 +12,11 @@
   background: #edf4f2;
   font-synthesis: none;
 }
+:root[data-theme="dark"] { --ink: #e4f1ef; --muted: #a9c0c0; --line: #315052; --surface: #183136; --surface-soft: #203d41; --sea: #6ed0d3; --sea-dark: #91e3dc; --shadow: 0 18px 45px rgba(0, 0, 0, 0.28); background: #102326; }
 
 * { box-sizing: border-box; }
 body { margin: 0; min-width: 320px; background: radial-gradient(circle at 8% 4%, rgba(117, 194, 178, 0.2), transparent 28rem), #edf4f2; }
+:root[data-theme="dark"] body { background: radial-gradient(circle at 8% 4%, rgba(44, 112, 107, 0.24), transparent 28rem), #102326; }
 a { color: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 .app-shell { min-height: 100vh; display: flex; flex-direction: column; }
@@ -27,6 +29,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .brand strong, .brand small { display: block; }
 .brand small { margin-top: 2px; color: var(--muted); font-size: 0.75rem; }
 .header-home { color: var(--sea-dark); font-size: 0.92rem; font-weight: 700; text-decoration: none; }
+.header-actions { display: flex; align-items: center; gap: 16px; }
+.theme-toggle { width: 38px; height: 38px; border: 1px solid var(--line); border-radius: 50%; color: var(--ink); background: var(--surface); cursor: pointer; font-size: 1.1rem; }
+.theme-toggle:hover { border-color: var(--sea); }
 .header-home:hover { text-decoration: underline; }
 #app { flex: 1; padding: 22px 0 72px; }
 
@@ -84,6 +89,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .service-link small { margin-top: 4px; color: var(--muted); }
 .service-arrow { color: var(--sea); font-size: 1.25rem; }
 .empty-state { padding: 28px; border: 1px dashed #b8ccca; border-radius: 18px; color: var(--muted); background: rgba(255,255,255,0.5); }
+:root[data-theme="dark"] .empty-state { background: rgba(24, 49, 54, 0.7); border-color: #466466; }
 .site-footer { padding: 22px 0 28px; display: flex; justify-content: space-between; gap: 20px; color: var(--muted); font-size: 0.78rem; }
 
 @media (max-width: 760px) {
